@@ -1,0 +1,120 @@
+<ng-template #loggedOut>
+    Please login with an authorized account.
+    </ng-template>
+
+<div class="container" *ngIf="currentUser && show; else loggedOut">
+    <div class="row">
+        <div class="col-md-4">
+			<div class="contact-info">
+                <i class="fa fa-car fa-5x" aria-hidden="true"></i>
+				<h2><b>Schedule a trip</b></h2>
+				<h4>Use this form to schedule a trip!</h4>
+			</div>
+        </div>
+        <div class="col-md-8">
+            <form
+                *ngIf="!isSuccessful"
+                name="form"
+                (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm"
+                novalidate>
+
+            <div class="row">
+                <div class="col-md-6">
+                    
+                    <div class="form-group">
+                        <label class="control-label" for="destinationZip">Destination Zip Code:</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="destinationZip"
+                            [(ngModel)]="scheduledRides.destinationZip"
+                            required
+                            #destinationZip="ngModel"
+                            placeholder="Zip"
+                            min="11111" 
+                            max="99999"/>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="leavingZip">Leaving Zip Code:</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="leavingZip"
+                            [(ngModel)]="scheduledRides.leavingZip"
+                            required
+                            #leavingZip="ngModel"
+                            placeholder="Zip"
+                            min="11111" 
+                            max="99999"/>
+                    </div>                    
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="date">Leaving Date:</label>
+                        <input
+                            type="date"
+                            class="form-control"
+                            name="date"
+                            [(ngModel)]="scheduledRides.date"
+                            required
+                            #date="ngModel"/>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="route">Route to Take:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="route"
+                            [(ngModel)]="scheduledRides.route"
+                            placeholder="Route..."
+                            required
+                            #route="ngModel"/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label" for="message">Message:</label>
+                        <textarea
+                            type="text"
+                            class="form-control"
+                            rows="5"
+                            name="message"
+                            placeholder="Message..."
+                            [(ngModel)]="scheduledRides.message"
+                            required
+                            #message="ngModel"></textarea>
+                    </div>
+                    <div class="form-group">        
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="submit" class="btn btn-dark">Submit</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="alert alert-warning" *ngIf="f.submitted && isFailed">
+                Requested trip failed!<br />{{ errorMessage }}
+              </div>
+              </form>
+      
+              <div class="alert alert-success" *ngIf="isSuccessful">
+                Your requested trip is successfully saved!
+              </div>
+        </div>
+    </div>
+</div>
+

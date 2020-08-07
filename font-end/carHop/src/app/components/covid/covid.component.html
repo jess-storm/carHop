@@ -1,0 +1,29 @@
+<div class="container">
+<h2 style="text-align: center;"><b>The Current Status of the Covid-19 virus affecting the United States</b></h2>
+  <table class="table">
+    <thead class="thead-dark">
+          <tr>
+            <th>Last Updated</th>
+            <th>hospitalizedCurrently</th>
+            <th>recovered</th>
+            <th>totalTestResults</th>
+            <th>totalTestResultsIncrease</th>
+            <th>positive</th>
+            <th>negative</th>
+          
+
+          </tr>
+        </thead>
+        <tbody *ngFor="let covidList of covid">
+          <tr>
+            <td>{{ covidList.lastModified }}</td>
+            <td>{{ covidList.hospitalizedCurrently }}</td>
+            <td>{{ covidList.recovered }}</td>
+            <td>{{ covidList.totalTestResults }}</td>
+            <td>{{ covidList.totalTestResultsIncrease }}</td>
+            <td>{{ covidList.positive }}</td>
+            <td>{{ covidList.negative }}</td>
+          </tr>
+        </tbody>
+        </table>
+</div>

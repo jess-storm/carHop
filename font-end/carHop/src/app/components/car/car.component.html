@@ -1,0 +1,48 @@
+<ng-template #loggedOut>
+  Please login with an authorized account.
+</ng-template>
+
+
+<div class="container" *ngIf="currentUser && buttonShow; else loggedOut">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="contact-info">
+        <img src="assets/images/carProfile.png" class="img-fluid rounded mx-auto d-block">
+        <h2 style="text-align: center;"><b>{{ car.username }}'s car details</b></h2>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <td><b>Owner's username:</b></td>
+            <td>{{ car.username }}</td>
+          </tr>
+          <tr>
+            <td><b>Make:</b></td>
+            <td>{{ car.make }}</td>
+          </tr>
+          <tr>
+            <td><b>Model:</b></td>
+            <td>{{ car.model }}</td>
+          </tr>
+          <tr>
+            <td><b>Year:</b></td>
+            <td>{{ car.year }}</td>
+          </tr>
+          <tr>
+            <td><b>Color:</b></td>
+            <td>{{ car.color }}</td>
+          </tr>
+          <tr>
+            <td><b>License Plate:</b></td>
+            <td>{{ car.licensePlate }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="buttons" align="center">
+    <button class="btn btn-dark" routerLink="/car/{{car.id}}/update" *ngIf="buttonShow">Edit Car Details</button>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="container" *ngIf="currentUser; else loggedOut">
+    <div class="row">
+        <div class="col-md-4">
+            <h3><b>{{ currentUser.fname }} {{ currentUser.lname }}</b></h3>
+            <br>
+            <img alt="User Pic" src="assets/images/profile.png" class="img-fluid rounded mx-auto d-block">
+        </div>
+
+        <div class="col-md-8">
+            <form class="form-horizontal" *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm" novalidate>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="username"><b>Username:</b></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required
+                            minlength="3" maxlength="20" #username="ngModel" placeholder={{currentUser.username}} />
+                        <div class="alert-danger" *ngIf="f.submitted && username.invalid">
+                            <div *ngIf="username.errors.required">Username is required</div>
+                            <div *ngIf="username.errors.minlength">
+                                Username must be at least 3 characters
+                            </div>
+                            <div *ngIf="username.errors.maxlength">
+                                Username must be at most 20 characters
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="email"><b>Email:</b></label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email
+                            #email="ngModel" placeholder={{currentUser.email}} />
+                        <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+                            <div *ngIf="email.errors.required">Email is required</div>
+                            <div *ngIf="email.errors.email">
+                                Email must be a valid email address
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="fname"><b>First Name:</b></label>
+                    <div class="col-sm-10">
+                        <label class="sr-only" for="fname"><b>First Name</b></label>
+                        <input type="text" class="form-control" name="fname" [(ngModel)]="form.fname" required
+                            #fname="ngModel" placeholder={{currentUser.fname}} />
+                        <div class="alert-danger" *ngIf="f.submitted && fname.invalid">
+                            <div *ngIf="fname.errors.required">First name is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="lname"><b>Last Name:</b></label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="lname" [(ngModel)]="form.lname" required
+                            #lname="ngModel" placeholder={{currentUser.lname}} />
+                        <div class="alert-danger" *ngIf="f.submitted && lname.invalid">
+                            <div *ngIf="lname.errors.required">Last name is required</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="role"><b>Role:</b></label>
+                    <div class="col-sm-10">
+                        <p>You must email us at carhopcontact@gmail.com to change your role!</p>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="password"><b>Password:</b></label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required
+                            minlength="6" #password="ngModel" placeholder="Please Re-enter password..." />
+                        <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+                            <div *ngIf="password.errors.required">Password is required</div>
+                            <div *ngIf="password.errors.minlength">
+                                Password must be at least 6 characters
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-2">
+                    <button type="submit" class="btn btn-dark">Save</button>
+                </div>
+            </div>
+                <div class="alert alert-warning" *ngIf="f.submitted && isUpdateFailed">
+                    Update failed!<br />{{ errorMessage }}
+                </div>
+            </form>
+            <div class="alert alert-success" *ngIf="isSuccessful">
+                Your changes have been saved!
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loggedOut>
+    Please login.
+</ng-template>

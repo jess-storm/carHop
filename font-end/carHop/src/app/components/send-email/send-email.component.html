@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+			<div class="contact-info">
+                <img src="assets/images/email.png" class = "img-fluid rounded mx-auto d-block">
+			</div>
+        </div>
+        <div class="col-md-8">
+            <form
+                *ngIf="!isSuccessful"
+                name="form"
+                (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm"
+                novalidate>
+
+                <div class="row mx-auto">
+                    <div class="col-sm-12">
+                        <h4 style="text-align: center;"><b>Use this form to receive an email from us!</b></h4>
+                    </div>
+                    
+                </div>
+            <div class="row">
+                <div class="col-md-6">
+                    
+                    <div class="form-group">
+                        <label class="control-label" for="emailAddress">Your email:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="destinationZip"
+                            [(ngModel)]="email.emailAddress"
+                            required
+                            #emailAddress="ngModel"
+                            placeholder="Your email address..."/>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="subject">Subject:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="subject"
+                            [(ngModel)]="email.subject"
+                            required
+                            #subject="ngModel"
+                            placeholder="Subject..."/>
+                    </div>                    
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label" for="bodyText">Message:</label>
+                        <textarea
+                            type="text"
+                            class="form-control"
+                            rows="5"
+                            name="bodyText"
+                            placeholder="Message..."
+                            [(ngModel)]="email.bodyText"
+                            required
+                            #bodyText="ngModel"></textarea>
+                    </div>
+
+                    <div class="form-group">        
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="submit" class="btn btn-dark" (click)="onSubmit()">Submit</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="alert alert-warning" *ngIf="f.submitted && isFailed">
+                Email failed!<br />{{ errorMessage }}
+              </div>
+              </form>
+      
+              <div class="alert alert-success" *ngIf="isSuccessful">
+                Your email has been successfully sent!
+              </div>
+        </div>
+    </div>
+</div>
+

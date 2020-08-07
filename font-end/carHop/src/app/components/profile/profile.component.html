@@ -1,0 +1,47 @@
+<ng-template #loggedOut>
+  Please login.
+</ng-template>
+
+<div class="container" *ngIf="currentUser; else loggedOut">
+      <div class="row">
+        <div class="col-md-4">
+            <h3><b>{{ currentUser.fname }} {{ currentUser.lname }}</b></h3>
+            <br>
+            <img alt="User Pic" src="assets/images/profile.png" class="img-fluid rounded mx-auto d-block">
+        </div>
+        <div class="col-sm-6" >
+            <table class="table table-borderless">
+                <tbody>
+                  <tr>
+                    <td><b>Username:</b></td>
+                    <td>{{ currentUser.username }}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Email:</b></td>
+                    <td>{{ currentUser.email }}</td>
+                  </tr>
+                  <tr>
+                    <td><b>First Name:</b></td>
+                    <td>{{ currentUser.fname }}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Last Name:</b></td>
+                    <td>{{ currentUser.lname }}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Role:</b></td>
+                    <td *ngFor="let role of currentUser.roles">{{ role }}</td> 
+                  </tr>
+                  <tr>
+                    <td><b>Password:</b></td>
+                    <td>..........</td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="btn btn-dark" routerLink="/profile/edit" style="margin:5px;">Edit profile</button>
+              <button class="btn btn-dark" routerLink="/reviews/{{user.id}}/user"  style="margin:5px;">My reviews</button>
+              <button class="btn btn-dark" routerLink="/car/{{user.car.id}}" *ngIf="isDriver" style="margin:5px;">Your car</button>
+              <button class="btn btn-dark" routerLink="/car/{{user.id}}/create" *ngIf="needsCar" style="margin:5px;">Create A Car</button>
+    </div>
+</div>
+

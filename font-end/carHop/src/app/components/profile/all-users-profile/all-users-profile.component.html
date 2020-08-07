@@ -1,0 +1,43 @@
+<ng-template #loggedOut>
+  Please login.
+  </ng-template>
+
+<div class="container" *ngIf="currentUser; else loggedOut">
+    <div class="row">
+      <div class="col-md-4">
+          <h3><b>{{ user.fname }} {{ user.lname }}</b></h3>
+          <br>
+          <img alt="User Pic" src="assets/images/profile.png" class="img-fluid rounded mx-auto d-block">
+      </div>
+      <div class="col-sm-6" >
+          <table class="table table-borderless">
+              <tbody>
+                <tr>
+                  <td><b>Username:</b></td>
+                  <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                  <td><b>Email:</b></td>
+                  <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                  <td><b>First Name:</b></td>
+                  <td>{{ user.fname }}</td>
+                </tr>
+                <tr>
+                  <td><b>Last Name:</b></td>
+                  <td>{{ user.lname }}</td>
+                </tr>
+                <tr>
+                  <td><b>Role:</b></td>
+                  <td *ngFor="let role of user.roles">{{ role.name }}</td> 
+                </tr>
+              </tbody>
+            </table>
+            <button class="btn btn-dark" routerLink="/reviews/{{ user.id }}/create">Write a review</button>
+            <button class="btn btn-dark" routerLink="/reviews/{{ user.id }}/user" style="margin:10px;">View reviews</button>
+      </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,29 @@
+<ng-template #loggedOut>
+    Please login.
+  </ng-template>
+
+<div class="container" *ngIf="currentUser; else loggedOut">
+    <h1 style="text-align: center;">Requested Trips</h1>
+    <button class="btn btn-dark" *ngIf="currentUser"routerLink="/requested_trips/{{ currentUser.id }}/create">Request a trip</button>
+    <p></p>
+    <table class = "table table-striped">
+        <thead>
+            <tr>
+                <th>Requested Date</th>
+                <th>Destination Zipcode</th> 
+                <th>Leaving Zipcode</th>
+                <th>Message</th>                            
+                <th>Created by Username:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ride of requestedRides">
+                <td><a routerLink="/requested_trips/{{ ride.id }}" class="text-dark">{{ride.date}}</a></td>
+                <td><a routerLink="/requested_trips/{{ ride.id }}" class="text-dark">{{ride.destinationZip}}</a></td>
+                <td><a routerLink="/requested_trips/{{ ride.id }}" class="text-dark">{{ride.leavingZip}}</a></td>
+                <td><a routerLink="/requested_trips/{{ ride.id }}" class="text-dark">{{ride.message}}</a></td>
+                <td><a routerLink="/profile/{{ ride.user.id }}" class="text-dark">{{ride.user.username}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

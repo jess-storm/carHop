@@ -1,0 +1,31 @@
+<ng-template #loggedOut>
+    Please login.
+  </ng-template>
+
+<div class="container" *ngIf="currentUser; else loggedOut">
+    <h1 style="text-align: center;">Scheduled Trips</h1>
+    <button class="btn btn-dark" *ngIf="buttonShow"routerLink="/outgoing_trips/{{ currentUser.id }}/create">Schedule a trip</button>
+    <p></p>
+    <table class = "table table-striped">
+        <thead>
+            <tr>
+                <th>Scheduled Date</th>
+                <th>Destination Zipcode</th>
+                <th>Leaving Zipcode</th>
+                <th>Message</th> 
+                <th>route</th>                           
+                <th>Username</th>
+            </tr>
+        </thead> 
+        <tbody>
+            <tr *ngFor="let ride of scheduledRides">
+                <td><a routerLink="/outgoing_trips/{{ ride.id }}" class="text-dark">{{ride.date}}</a></td>
+                <td><a routerLink="/outgoing_trips/{{ ride.id }}" class="text-dark">{{ride.destinationZip}}</a></td>
+                <td><a routerLink="/outgoing_trips/{{ ride.id }}" class="text-dark">{{ride.leavingZip}}</a></td>
+                <td><a routerLink="/outgoing_trips/{{ ride.id }}" class="text-dark">{{ride.message}}</a></td>
+                <td><a routerLink="/outgoing_trips/{{ ride.id }}" class="text-dark">{{ride.route}}</a></td>
+                <td><a routerLink="/profile/{{ ride.user.id }}" class="text-dark">{{ride.user.username}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

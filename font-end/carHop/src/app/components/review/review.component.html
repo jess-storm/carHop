@@ -1,0 +1,31 @@
+<ng-template #loggedOut>
+    Please login.
+</ng-template>
+
+<div class="container" *ngIf="currentUser; else loggedOut">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="contact-info">
+                <img src="assets/images/review.png" class="img-fluid rounded mx-auto d-block">
+                <h3 *ngFor="let u of review| slice:0:1"><b>{{u.user.username}}'s reviews!</b></h3>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12" *ngFor="let r of review">
+
+                    <div class="card">
+                        <h5 class="card-header text-white bg-dark">{{r.title}}</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">By: {{r.author}} on {{r.date}}</h5>
+                            <h6 class="card-text">Rating: {{r.rating}}</h6>
+                            <p class="card-text">{{r.message}}</p>
+                        </div>
+                    </div>
+                    <p></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

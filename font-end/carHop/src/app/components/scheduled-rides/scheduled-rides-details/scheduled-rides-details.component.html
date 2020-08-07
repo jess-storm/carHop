@@ -1,0 +1,49 @@
+<ng-template #loggedOut>
+  Please login.
+</ng-template>
+
+<div class="container" *ngIf="currentUser; else loggedOut">
+    <div class="row">
+        <div class="col-md-4">
+			<div class="contact-info">
+        <img src="assets/images/sportsCar.png" class = "img-fluid rounded mx-auto d-block">
+				<h2><b>Scheduled Trip Details</b></h2>
+			</div>
+        </div>
+        <div class="col-sm-6" >
+            <table class="table table-borderless">
+                <tbody>
+                  <tr>
+                    <td><b>Username:</b></td>
+                    <td><a routerLink="/profile/{{ scheduledRide.user.id }}" class="text-dark">{{scheduledRide.user.username}}</a></td>
+                  </tr>
+                  <tr>
+                    <td><b>Destination Zip:</b></td>
+                    <td>{{ scheduledRide.destinationZip }}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Leaving Zip:</b></td>
+                    <td>{{ scheduledRide.leavingZip }}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Date Requested:</b></td>
+                    <td>{{ scheduledRide.date }}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Message:</b></td>
+                    <td>{{scheduledRide.message}}</td>
+                  </tr>
+                  <tr>
+                    <td><b>Route:</b></td>
+                    <td>{{scheduledRide.route}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p>Click <b><a routerLink="/outgoing_trips" class="text-white" id = "signup">here</a></b> to go back to the scheduled rides page.</p>
+              <button class="btn btn-dark" *ngIf="buttonShow" (click)="delete()" style="margin:10px;">Delete</button>
+              <button class="btn btn-dark" *ngIf="buttonShow" routerLink="/outgoing_trips/{{scheduledRide.id}}/update">Update</button>
+        </div>
+</div>
+
+
+

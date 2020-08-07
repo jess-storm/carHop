@@ -1,0 +1,116 @@
+<ng-template #loggedOut>
+    Please login.
+</ng-template>
+
+<div class="container" *ngIf="currentUser; else loggedOut">
+    <div class="row">
+        <div class="col-md-4">
+			<div class="contact-info">
+                <img src="assets/images/traveling.png" class = "img-fluid rounded mx-auto d-block">
+			</div>
+        </div>
+        <div class="col-md-8">
+            <form
+                *ngIf="!isSuccessful"
+                name="form"
+                (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm"
+                novalidate>
+
+            <div class="row">
+                <div class="col-md-12"><h3><b>Use this form to create your car!</b></h3></div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="make">Make:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="make"
+                            [(ngModel)]="car.make"
+                            required
+                            #make="ngModel"
+                            placeholder="Make..."/>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="model">Model:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="model"
+                            [(ngModel)]="car.model"
+                            required
+                            #model="ngModel"
+                            placeholder="Model..."/>
+                    </div>                    
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="color">Color:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="color"
+                            [(ngModel)]="car.color"
+                            required
+                            #color="ngModel"
+                            placeholder="Color..."/>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="year">Year:</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="year"
+                            [(ngModel)]="car.year"
+                            placeholder="Year..."
+                            required
+                            #year="ngModel"
+                            min="1950" 
+                            max="2100"/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label" for="licensePlate">License Plate:</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="licensePlate"
+                            placeholder="License Plate..."
+                            [(ngModel)]="car.licensePlate"
+                            required
+                            #licensePlate="ngModel"/>
+                    </div>
+                    <div class="form-group">        
+                        <div class="col-sm-offset-2 col-sm-10">
+                          <button type="submit" class="btn btn-dark" (click)="onSubmit()">Submit</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="alert alert-warning" *ngIf="f.submitted && isFailed">
+                Car failed!<br />{{ errorMessage }}
+              </div>
+              </form>
+      
+              <div class="alert alert-success" *ngIf="isSuccessful">
+                Your car is successfully created!
+              </div>
+        </div>
+    </div>
+</div>
+
